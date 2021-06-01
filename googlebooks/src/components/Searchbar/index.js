@@ -20,7 +20,6 @@ function Searchbar () {
             search: formik.values.search
         }
         axios.get('http://localhost:3001/books', newSearch)
-        
     }
     })
 
