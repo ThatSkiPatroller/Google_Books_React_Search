@@ -3,6 +3,7 @@ import { Card, TextField, Button, Grid } from '@material-ui/core';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import './style.css';
+import axios from 'axios';
 
 const validationSchema = Yup.object().shape({
     search: Yup.string()
@@ -18,6 +19,7 @@ function Searchbar () {
         const newSearch = {
             search: formik.values.search
         }
+        axios.get('http://localhost:3001/books', newSearch)
         
     }
     })
