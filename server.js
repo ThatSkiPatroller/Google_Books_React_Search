@@ -10,5 +10,3 @@ mongoose.connect('mongodb+srv://picklerick:picklerick123@cluster0.rpqxm.mongodb.
 
 app.use('/', require('./routes/index'));
 app.listen(3001, function () {
-    console.log('express server is running on port 3001')
-})
