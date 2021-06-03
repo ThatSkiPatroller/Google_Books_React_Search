@@ -8,5 +8,7 @@ app.use(express.json());
 
 mongoose.connect('mongodb+srv://picklerick:picklerick123@cluster0.rpqxm.mongodb.net/googlebooks?retryWrites=true&w=majority')
 
-app.use('/', require('./routes/index'));
+app.use(require('./routes'));
 app.listen(3001, function () {
+    console.log("App listening on port 3001");
+})
