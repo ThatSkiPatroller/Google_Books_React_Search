@@ -13,15 +13,13 @@ router.route('/books').post((req, res) => {
     const description = req.body.description;
     const image = req.body.image;
     const link = req.body.link;
-    const newBook = new Books({
+    db.books.create({
         title,
         authors,
         description,
         image,
         link
     })
-
-    newBook.save();
 })
 
 

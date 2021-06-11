@@ -1,16 +1,82 @@
 import React from 'react';
-import { Card, Typography, Grid } from '@material-ui/core';
+import Searchbar from '../Searchbar';
+import {makeStyles} from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import axios from 'axios';
+
 
 function Results (props) {
+
+    const handleSaveSubmit = (e) => {
+        for (let i=0; i<props.books.length; i++) {
+            console.log(e.target.parentElement.name)
+        }
+    }
+
+    const useStyles = makeStyles({
+        root: {
+          maxWidth: 345,
+        },
+        media: {
+          height: 140,
+        },
+      });
+
+    const classes= useStyles();
+
+        const bookCards = props.books.map((book) => {
+            let picture = '';
+            if (book.volumeInfo.imageLinks.thumbnail) {
+                picture = book.volumeInfo.imageLinks.thumbnail;
+            }
+            let title= '';
+            if (book.volumeInfo.title) {
+                title = book.volumeInfo.title;
+            }
+            let bio='';
+            return(
+                <Card className={classes.root}>
+                    <CardActionArea>
+                    <CardMedia
+                    className={classes.media}
+                    image={picture}
+                    title={title} />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                        {title}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        
+                    </Typography>
+
+                    </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                    <Button size="small" color="primary" name={book.id} onClick = {handleSaveSubmit}>
+                    Save
+                    </Button>
+                    <Button size="small" color="primary">
+                    Learn More
+                    </Button>
+                </CardActions>
+                </Card>
+            )
+        })
+    
+    return(
     <div>
         <Grid container>
-            <Card>
-                <Typography>
-                    <h1 {props.results} />
-                </Typography>
-            </Card>
+            {bookCards}
         </Grid>
     </div>
+    )
 }
 
 export default Results;

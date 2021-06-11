@@ -5,24 +5,50 @@ import * as Yup from "yup";
 import './style.css';
 import axios from 'axios';
 
-const validationSchema = Yup.object().shape({
-    search: Yup.string()
-})
 
-function Searchbar (e) {
+function Searchbar (props) {
 
-    const [search, setSearch] = useState('')
+    const apiKey = 'AIzaSyBnAsEf6nQxgoZchu_-fhVa3qleLyxjhuo'
+
+    const [search, setSearch] = useState('');
+    const [cards, setCards] = useState([]);
 
     // const formik = useFormik({
     //     initialValues: {
     //         search: 'Search'
     //     },
     // validationSchema: validationSchema,
+
+    // this needs to call the google api instead of mongo
     const onSubmit = (values) => {
-        axios.get('http://localhost:3001/api/books/' + search)
-        .then(res => console.log(res))
-        console.log(search)
+        axios.get('https://www.googleapis.com/books/v1/volumes?q=' + search + '&key' + apiKey)
+        .then(res => {
+        console.log(res)
+        if (res.data.items.length > 0) {
+            setCards(res.data.items)
+            props.makeCards(res.data.items);
+        }}
+        )
+        // how to send res to results module ??
+        // setSearch(res)
+        console.log('cards: ', cards)
+    } 
+
+    const handleCards = () => {
+        const data = cards.map((item, i) => {
+            let picture = '';
+            if (data.volumeInfo.imageLinks.thumbnail) {
+                picture = data.volumeInfo.imageLinks.thumbail;
+            }
+
+            return (
+                <Card>
+
+                </Card>
+            )
+        })
     }
+    
     
 
     // const handleChange = (e) => {
