@@ -15,7 +15,21 @@ import axios from 'axios';
 function Results (props) {
 
     const handleSaveSubmit = (e) => {
-        for (let i=0; i<props.books.length; i++) {
+        // for (let i=0; i<props.books.length; i++) {
+        //     console.log(e.target.parentElement.name)
+        // }
+        console.log(e.target.parentElement.name);
+        // I don't think i have to save book info, just
+        // loop through the saved ones in saved page
+        const newBook = {
+            title = e.target.parentElement.title,
+
+        }
+        axios.post('/books')
+    }
+
+    const handleView = (e) => {
+        for (let i=0; i<props.books.length; i ++) {
             console.log(e.target.parentElement.name)
         }
     }
@@ -41,6 +55,14 @@ function Results (props) {
                 title = book.volumeInfo.title;
             }
             let bio='';
+            if (book.volumeInfo.description) {
+                bio = book.volumeInfo.description;
+            }
+            let authors = '';
+            if (book.volumeInfo.authors) {
+                authors = book.volumeInfo.authors;
+            }
+            let link = '';
             return(
                 <Card className={classes.root}>
                     <CardActionArea>
@@ -59,11 +81,11 @@ function Results (props) {
                     </CardContent>
                     </CardActionArea>
                     <CardActions>
-                    <Button size="small" color="primary" name={book.id} onClick = {handleSaveSubmit}>
+                    <Button size="small" color="primary" name={book.id} onClick={handleSaveSubmit}>
                     Save
                     </Button>
-                    <Button size="small" color="primary">
-                    Learn More
+                    <Button size="small" color="primary" onClick={handleView}>
+                    View
                     </Button>
                 </CardActions>
                 </Card>
