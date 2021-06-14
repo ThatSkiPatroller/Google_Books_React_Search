@@ -15,7 +15,7 @@ function Search () {
 
     return(
     <div>
-        <Navbar NavBut="Saved"/>
+        <Navbar NavBut="Saved" Href='/Saved'/>
         <Header title="Search Google Books"/>
         <Searchbar makeCards={makeCards}/>
         <Results books={books} />

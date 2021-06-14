@@ -15,7 +15,7 @@ function Navbar (props) {
                 <Typography variant="h6">
                     <h3>Google Books</h3>
                 </Typography></Grid>
-                <Button color="inherit" justify="flex-end">{props.NavBut}</Button>
+                <Button color="inherit" justify="flex-end" href={props.Href}>{props.NavBut} </Button>
             </Toolbar>
         </AppBar>
         </div>

@@ -5,7 +5,7 @@ import Header from '../components/Header';
 function Saved () {
     return(
         <div>
-            <Navbar NavBut="Search"/>
+            <Navbar NavBut="Search" Href='/Search'/>
             <Header title="Saved Google Books" />
         </div>
     )
